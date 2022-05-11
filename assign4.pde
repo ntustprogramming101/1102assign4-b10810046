@@ -162,7 +162,7 @@ void setup() {
   cabbageY = new float [6];
 
   for (int i=0; i<=5; i++) {
-    cabbageX[i] = SOIL_SIZE*floor(random(0, 9));
+    cabbageX[i] = SOIL_SIZE*floor(random(0, 8));
     cabbageY[i] = SOIL_SIZE*floor(random(0, 4))+i*4*SOIL_SIZE;
     soldierX[i] = SOIL_SIZE*floor(random(0, 9));
     soldierY[i] = SOIL_SIZE*floor(random(0, 4))+i*4*SOIL_SIZE;
@@ -270,37 +270,37 @@ void draw() {
           }
         }
         if (soilHealth[i][j] <=12 && soilHealth[i][j] >=10 ) {
-          if (j<3) {
+          if (j<=3) {
             image(soils[0][3], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<7) {
+          } else if (j<=7) {
             image(soils[1][3], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<11) {
+          } else if (j<=11) {
             image(soils[2][3], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<15) {
+          } else if (j<=15) {
             image(soils[3][3], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<19) {
+          } else if (j<=19) {
             image(soils[4][3], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<23) {
+          } else if (j<=23) {
             image(soils[5][3], i * SOIL_SIZE, j * SOIL_SIZE);
           }
         }
         if (soilHealth[i][j] <=15 && soilHealth[i][j] >=13 ) {
-          if (j<3) {
+          if (j<=3) {
             image(soils[0][4], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<7) {
+          } else if (j<=7) {
             image(soils[1][4], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<11) {
+          } else if (j<=11) {
             image(soils[2][4], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<15) {
+          } else if (j<=15) {
             image(soils[3][4], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<19) {
+          } else if (j<=19) {
             image(soils[4][4], i * SOIL_SIZE, j * SOIL_SIZE);
-          } else if (j<23) {
+          } else if (j<=23) {
             image(soils[5][4], i * SOIL_SIZE, j * SOIL_SIZE);
           }
         }
 
-        if (soilHealth[i][j] <0) {
+        if (soilHealth[i][j] <=0) {
           soilHealth[i][j] = 0;
         }
         //石頭
@@ -397,7 +397,7 @@ void draw() {
               }
               if (playerCol == i+1 && playerRow == j ) {
                 soilHealth[i][j] -= 30/15;
-                if (soilHealth[i][j] <=0 ) {
+                if (soilHealth[i][j] <=0 && soilHealth[i+1][j+1] != 0) {
                   playerMoveDirection = LEFT;
                   playerMoveTimer = playerMoveDuration;
                 }
@@ -427,7 +427,7 @@ void draw() {
               }
               if (playerCol == i-1 && playerRow == j ) {
                 soilHealth[i][j] -= 30/15;
-                if (soilHealth[i][j] <=0 ) {
+                if (soilHealth[i][j] <=0 && soilHealth[i-1][j+1] != 0) {
                   playerMoveDirection = RIGHT;
                   playerMoveTimer = playerMoveDuration;
                 }
@@ -539,6 +539,7 @@ void draw() {
         leftState = false;
         rightState = false;
         downState = false;
+        soilHealth[4][0] = 15;
       }
     }
 
